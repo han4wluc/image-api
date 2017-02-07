@@ -2,7 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import formidable from 'express-formidable';
-import routes from './routes'
+import routes from './routes';
 
 const app = express();
 const PORT = 3001;
@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(formidable());
 
-// require('./routes')(app);
 routes(app);
 
 export default app;

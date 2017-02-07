@@ -11,7 +11,7 @@ const assert = chai.assert;
 
 const clearImageFolder = function(){
   fsp.emptyDir(path.join(__dirname, './images'));
-}
+};
 
 describe('util.downloadFileFromTo', function(){
 
@@ -27,7 +27,7 @@ describe('util.downloadFileFromTo', function(){
     nock(url)
       .get('/')
       .reply(200, actualContent);
-    
+
     await util.downloadFileFromTo(url, outputPath);
     const expectedContent = await fsp.readFile(outputPath, 'utf8');
 
@@ -45,12 +45,12 @@ describe('util.downloadFileFromTo', function(){
 
     try {
       await util.downloadFileFromTo(url, outputPath);
-      assert(false)
+      assert(false);
     } catch (error){
       const fileExists = fs.existsSync(outputPath);
       assert.isNotOk(fileExists);
       assert.isOk(error);
-      done()
+      done();
     }
   });
 
@@ -68,9 +68,9 @@ describe('util.downloadFileFromTo', function(){
       await util.downloadFileFromTo(url, outputPath);
     } catch (error){
       assert.isOk(error);
-      done()
+      done();
     }
-    
+
   });
 
 });
@@ -83,9 +83,8 @@ describe('util.upscaleImage', function(){
 
   it('should', async function(){
 
-    const inputPath = path.join(__dirname, './images/input1');
-    const outputPath = path.join(__dirname, './images/output3');
-    await fsp.writeFile(inputPath, 'mock content');
+    const inputPath = path.join(__dirname, './fixture/image.jpg');
+    const outputPath = path.join(__dirname, './images/output3.jpg');
     await util.upscaleImage(inputPath, outputPath);
 
     const fileExists = await fsp.exists(outputPath);
@@ -93,6 +92,4 @@ describe('util.upscaleImage', function(){
     assert.isOk(fileExists);
 
   });
-})
-
-
+});
